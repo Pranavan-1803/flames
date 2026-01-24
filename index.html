@@ -74,9 +74,15 @@
                 <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Partner's Name</label>
                 <input type="text" id="name2" placeholder="Enter name..." class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-400 focus:outline-none transition-all text-lg">
             </div>
-            <button onclick="startFlames()" id="start-btn" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-pink-200 transition-all active:scale-95">
-                Calculate Destiny ✨
-            </button>
+            
+            <div class="pt-2 flex flex-col gap-3">
+                <button onclick="startFlames()" id="start-btn" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-pink-200 transition-all active:scale-95">
+                    Calculate Destiny ✨
+                </button>
+                <button onclick="shareWebsite()" class="w-full border-2 border-pink-100 text-pink-400 font-semibold py-3 rounded-xl hover:bg-pink-50 transition-all flex items-center justify-center gap-2">
+                    Invite Friends 🔗
+                </button>
+            </div>
         </div>
 
         <!-- Animation Area -->
@@ -129,7 +135,7 @@
 
             <div class="flex flex-col gap-3">
                 <button onclick="shareResult()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
-                    Share Link 🔗
+                    Share Result 🔗
                 </button>
                 <button onclick="resetApp()" class="w-full border-2 border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition-all">
                     Check Another
@@ -269,12 +275,13 @@
             document.getElementById('result-text').innerText = result.title;
             document.getElementById('result-desc').innerText = result.desc;
 
+            // Trigger Ad Loading only after the container is visible to avoid "No slot size" error
             if (!adInitialized) {
                 try {
                     (adsbygoogle = window.adsbygoogle || []).push({});
                     adInitialized = true;
                 } catch (e) {
-                    console.warn("AdSense push inhibited by sandbox.");
+                    console.error("AdSense push failed:", e);
                 }
             }
         }
@@ -293,29 +300,28 @@
             });
         }
 
-        function shareResult() {
-            const n1 = encodeURIComponent(document.getElementById('name1').value);
-            const n2 = encodeURIComponent(document.getElementById('name2').value);
+        function shareWebsite() {
             let baseUrl = window.location.href.split('?')[0];
-            const url = `${baseUrl}?n1=${n1}&n2=${n2}`;
-            
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(url).then(() => {
-                    showToast("Link copied to clipboard!");
-                }).catch(() => fallbackCopy(url));
-            } else {
-                fallbackCopy(url);
-            }
+            copyToClipboard(baseUrl, "Website link copied!");
         }
 
-        function fallbackCopy(text) {
+        function shareResult() {
+            const n1 = document.getElementById('name1').value;
+            const n2 = document.getElementById('name2').value;
+            if(!n1 || !n2) return;
+            let baseUrl = window.location.href.split('?')[0];
+            const url = `${baseUrl}?n1=${encodeURIComponent(n1)}&n2=${encodeURIComponent(n2)}`;
+            copyToClipboard(url, "Result link copied!");
+        }
+
+        function copyToClipboard(text, successMsg) {
             const dummy = document.createElement('input');
             document.body.appendChild(dummy);
             dummy.value = text;
             dummy.select();
             document.execCommand('copy');
             document.body.removeChild(dummy);
-            showToast("Link copied to clipboard!");
+            showToast(successMsg);
         }
 
         function showToast(msg) {
