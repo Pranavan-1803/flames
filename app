@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMES - Discover Your Relationship</title>
+    
+    <!-- Google AdSense Script (Replace ca-pub-XXXX with your actual ID) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #fae8ff 100%);
+            min-height: 100vh;
+        }
+        .letter-slot {
+            display: inline-block;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        .letter-slot.struck::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #ef4444;
+            transform: scaleX(1);
+            transition: transform 0.3s ease;
+        }
+        .flames-letter {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .flames-letter.eliminated {
+            text-decoration: line-through;
+            opacity: 0.3;
+            transform: scale(0.8);
+            filter: grayscale(1);
+        }
+        .flames-letter.winner {
+            transform: scale(1.5);
+            color: #db2777;
+            font-weight: 800;
+        }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .animate-beat {
+            animation: heartBeat 1s infinite;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4">
+
+    <div id="app" class="w-full max-w-md bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-white">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-extrabold text-pink-600 tracking-tighter mb-2">FLAMES</h1>
+            <p class="text-gray-500 text-sm">Find out your relationship's destiny</p>
+        </header>
+
+        <!-- Input Section -->
+        <div id="input-container" class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Your Name</label>
+                <input type="text" id="name1" placeholder="Enter name..." class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-400 focus:outline-none transition-all text-lg">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Partner's Name</label>
+                <input type="text" id="name2" placeholder="Enter name..." class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-400 focus:outline-none transition-all text-lg">
+            </div>
+            <button onclick="startFlames()" id="start-btn" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-pink-200 transition-all active:scale-95">
+                Check Destiny ✨
+            </button>
+        </div>
+
+        <!-- Animation Area -->
+        <div id="visualizer" class="hidden mt-8 text-center">
+            <div id="striking-area" class="flex flex-col gap-4 mb-6">
+                <div id="display-name1" class="text-2xl font-bold tracking-widest text-pink-400"></div>
+                <div id="display-name2" class="text-2xl font-bold tracking-widest text-pink-400"></div>
+            </div>
+            
+            <div id="counter-label" class="text-xs font-bold text-gray-400 uppercase opacity-0 transition-opacity">Remaining Letter Count</div>
+            <div id="counter-display" class="text-4xl font-black text-gray-800 mb-6 opacity-0 transition-opacity">
+                0
+            </div>
+
+            <div id="flames-container" class="flex justify-center gap-3 text-2xl font-bold mb-8 opacity-0 transition-opacity">
+                <span data-idx="0" class="flames-letter">F</span>
+                <span data-idx="1" class="flames-letter">L</span>
+                <span data-idx="2" class="flames-letter">A</span>
+                <span data-idx="3" class="flames-letter">M</span>
+                <span data-idx="4" class="flames-letter">E</span>
+                <span data-idx="5" class="flames-letter">S</span>
+            </div>
+        </div>
+
+        <!-- Final Result Area -->
+        <div id="result-container" class="hidden text-center mt-4">
+            <div class="mb-6">
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1">Result for</p>
+                <div class="flex items-center justify-center gap-2 flex-wrap">
+                    <span id="res-name1" class="text-xl font-bold text-pink-500"></span>
+                    <span class="text-gray-300 font-light">&</span>
+                    <span id="res-name2" class="text-xl font-bold text-pink-500"></span>
+                </div>
+            </div>
+
+            <div id="result-emoji" class="text-7xl mb-4"></div>
+            <h2 id="result-text" class="text-3xl font-extrabold text-pink-600 mb-2 uppercase"></h2>
+            <p id="result-desc" class="text-gray-500 italic mb-8"></p>
+            
+            <!-- AdSense Placeholder -->
+            <div id="ad-wrapper" class="my-6 bg-gray-50 rounded-lg p-2 border border-dashed border-gray-300 min-h-[100px] flex items-center justify-center overflow-hidden">
+                <ins class="adsbygoogle"
+                     style="display:block; min-width: 250px; min-height: 90px"
+                     data-ad-client="ca-pub-0000000000000000"
+                     data-ad-slot="0000000000"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <span class="text-[10px] text-gray-400 uppercase absolute">Advertisement</span>
+            </div>
+
+            <div class="flex flex-col gap-3">
+                <button onclick="shareResult()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                    Share Link 🔗
+                </button>
+                <button onclick="resetApp()" class="w-full border-2 border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition-all">
+                    Start Over
+                </button>
+            </div>
+        </div>
+
+        <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-6 py-2 rounded-full text-sm opacity-0 transition-opacity pointer-events-none z-50">
+            Link copied to clipboard!
+        </div>
+    </div>
+
+    <script>
+        const FLAMES_MAP = {
+            'F': { title: 'Friends', emoji: '🤝', desc: 'A bond that lasts forever.' },
+            'L': { title: 'Love', emoji: '❤️', desc: 'You two are made for each other.' },
+            'A': { title: 'Affection', emoji: '🥰', desc: 'There\'s a sweet spark between you.' },
+            'M': { title: 'Marriage', emoji: '💍', desc: 'Get the wedding bells ready!' },
+            'E': { title: 'Enemies', emoji: '👿', desc: 'Maybe just stay away from each other...' },
+            'S': { title: 'Siblings', emoji: '👫', desc: 'A purely platonic family connection.' }
+        };
+
+        const sleep = (ms) => new Promise(res => setTimeout(res, ms));
+        let adInitialized = false;
+
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const n1 = urlParams.get('n1');
+            const n2 = urlParams.get('n2');
+            if (n1 && n2) {
+                document.getElementById('name1').value = decodeURIComponent(n1);
+                document.getElementById('name2').value = decodeURIComponent(n2);
+                startFlames();
+            }
+        };
+
+        async function startFlames() {
+            const name1Raw = document.getElementById('name1').value.trim();
+            const name2Raw = document.getElementById('name2').value.trim();
+
+            if (!name1Raw || !name2Raw) return showToast("Please enter both names!");
+
+            document.getElementById('input-container').classList.add('hidden');
+            document.getElementById('visualizer').classList.remove('hidden');
+            document.getElementById('result-container').classList.add('hidden');
+            
+            let n1Arr = name1Raw.toLowerCase().replace(/\s/g, '').split('');
+            let n2Arr = name2Raw.toLowerCase().replace(/\s/g, '').split('');
+
+            const disp1 = document.getElementById('display-name1');
+            const disp2 = document.getElementById('display-name2');
+            disp1.innerHTML = name1Raw.split('').map(l => `<span class="letter-slot">${l}</span>`).join('');
+            disp2.innerHTML = name2Raw.split('').map(l => `<span class="letter-slot">${l}</span>`).join('');
+
+            await sleep(800);
+
+            const tempN2 = [...n2Arr];
+            const struckIndices2 = [];
+
+            for (let i = 0; i < n1Arr.length; i++) {
+                const char = n1Arr[i];
+                const matchIndex = tempN2.indexOf(char);
+                if (matchIndex !== -1) {
+                    tempN2[matchIndex] = null;
+                    disp1.children[i].classList.add('struck', 'opacity-30');
+                    for(let j=0; j < disp2.children.length; j++) {
+                        if (name2Raw.toLowerCase().replace(/\s/g, '')[j] === char && !struckIndices2.includes(j)) {
+                            disp2.children[j].classList.add('struck', 'opacity-30');
+                            struckIndices2.push(j);
+                            break;
+                        }
+                    }
+                    await sleep(300);
+                }
+            }
+
+            const countN1 = n1Arr.filter((char) => {
+                const matchIdx = n2Arr.indexOf(char);
+                if (matchIdx !== -1) {
+                    n2Arr[matchIdx] = null;
+                    return false;
+                }
+                return true;
+            }).length;
+            const countN2 = n2Arr.filter(c => c !== null).length;
+            const totalCount = countN1 + countN2;
+
+            document.getElementById('counter-label').classList.remove('opacity-0');
+            const countEl = document.getElementById('counter-display');
+            countEl.classList.remove('opacity-0');
+            for(let i=0; i<=totalCount; i++) {
+                countEl.innerText = i;
+                await sleep(50);
+            }
+            await sleep(800);
+
+            const flamesContainer = document.getElementById('flames-container');
+            const flamesLetters = Array.from(flamesContainer.children);
+            flamesContainer.classList.remove('opacity-0');
+            
+            let flames = ['F', 'L', 'A', 'M', 'E', 'S'];
+            let currentIndex = 0;
+
+            if (totalCount > 0) {
+                while (flames.length > 1) {
+                    let strikeIndex = (currentIndex + totalCount - 1) % flames.length;
+                    const letterToStrike = flames[strikeIndex];
+                    const el = flamesLetters.find(e => e.innerText === letterToStrike && !e.classList.contains('eliminated'));
+                    el.classList.add('eliminated');
+                    flames.splice(strikeIndex, 1);
+                    currentIndex = strikeIndex;
+                    await sleep(600);
+                }
+            } else {
+                flames = ['S']; 
+                flamesLetters.slice(0, 5).forEach(el => el.classList.add('eliminated'));
+            }
+
+            const winnerLetter = flames[0];
+            const winnerEl = flamesLetters.find(e => e.innerText === winnerLetter && !e.classList.contains('eliminated'));
+            winnerEl.classList.add('winner', 'animate-beat');
+            
+            await sleep(1500);
+            showResult(winnerLetter, name1Raw, name2Raw);
+        }
+
+        function showResult(letter, n1, n2) {
+            const result = FLAMES_MAP[letter];
+            document.getElementById('visualizer').classList.add('hidden');
+            const resultContainer = document.getElementById('result-container');
+            resultContainer.classList.remove('hidden');
+            
+            // Set Names
+            document.getElementById('res-name1').innerText = n1;
+            document.getElementById('res-name2').innerText = n2;
+
+            document.getElementById('result-emoji').innerText = result.emoji;
+            document.getElementById('result-text').innerText = result.title;
+            document.getElementById('result-desc').innerText = result.desc;
+
+            if (!adInitialized) {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    adInitialized = true;
+                } catch (e) {
+                    console.error("AdSense could not load.");
+                }
+            }
+        }
+
+        function resetApp() {
+            document.getElementById('name1').value = '';
+            document.getElementById('name2').value = '';
+            document.getElementById('input-container').classList.remove('hidden');
+            document.getElementById('visualizer').classList.add('hidden');
+            document.getElementById('result-container').classList.add('hidden');
+            document.getElementById('counter-label').classList.add('opacity-0');
+            document.getElementById('counter-display').classList.add('opacity-0');
+            document.getElementById('flames-container').classList.add('opacity-0');
+            Array.from(document.querySelectorAll('.flames-letter')).forEach(el => {
+                el.className = 'flames-letter';
+            });
+        }
+
+        function shareResult() {
+            const n1 = encodeURIComponent(document.getElementById('name1').value);
+            const n2 = encodeURIComponent(document.getElementById('name2').value);
+            let baseUrl = window.location.href.split('?')[0];
+            const url = `${baseUrl}?n1=${n1}&n2=${n2}`;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showToast("Link copied to clipboard!");
+                }).catch(() => fallbackCopy(url));
+            } else {
+                fallbackCopy(url);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast("Link copied to clipboard!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.remove('opacity-0');
+            setTimeout(() => toast.classList.add('opacity-0'), 2500);
+        }
+    </script>
+</body>
+</html>
