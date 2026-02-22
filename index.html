@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FLAMES - Discover Your Destiny</title>
-    
+
     <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606588100266808" crossorigin="anonymous"></script>
-    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606588100266808"
+        crossorigin="anonymous"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -16,11 +18,13 @@
             background: linear-gradient(135deg, #fce7f3 0%, #fae8ff 100%);
             min-height: 100vh;
         }
+
         .letter-slot {
             display: inline-block;
             transition: all 0.5s ease;
             position: relative;
         }
+
         .letter-slot.struck::after {
             content: '';
             position: absolute;
@@ -32,30 +36,44 @@
             transform: scaleX(1);
             transition: transform 0.3s ease;
         }
+
         .flames-letter {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .flames-letter.eliminated {
             text-decoration: line-through;
             opacity: 0.3;
             transform: scale(0.8);
             filter: grayscale(1);
         }
+
         .flames-letter.winner {
             transform: scale(1.5);
             color: #db2777;
             font-weight: 800;
         }
+
         @keyframes heartBeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
+
         .animate-beat {
             animation: heartBeat 1s infinite;
         }
     </style>
 </head>
+
 <body class="flex flex-col items-center justify-center p-4">
 
     <div id="app" class="w-full max-w-md bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-white">
@@ -67,19 +85,25 @@
         <!-- Input Section -->
         <div id="input-container" class="space-y-4">
             <div>
-                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Your Name</label>
-                <input type="text" id="name1" placeholder="Enter name..." class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-400 focus:outline-none transition-all text-lg">
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Your
+                    Name</label>
+                <input type="text" id="name1" placeholder="Enter name..."
+                    class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-400 focus:outline-none transition-all text-lg">
             </div>
             <div>
-                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Partner's Name</label>
-                <input type="text" id="name2" placeholder="Enter name..." class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-400 focus:outline-none transition-all text-lg">
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Partner's
+                    Name</label>
+                <input type="text" id="name2" placeholder="Enter name..."
+                    class="w-full px-4 py-3 rounded-xl border-2 border-pink-100 focus:border-pink-400 focus:outline-none transition-all text-lg">
             </div>
-            
+
             <div class="pt-2 flex flex-col gap-3">
-                <button onclick="startFlames()" id="start-btn" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-pink-200 transition-all active:scale-95">
+                <button onclick="startFlames()" id="start-btn"
+                    class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-pink-200 transition-all active:scale-95">
                     Calculate Destiny ✨
                 </button>
-                <button onclick="shareWebsite()" class="w-full border-2 border-pink-100 text-pink-400 font-semibold py-3 rounded-xl hover:bg-pink-50 transition-all flex items-center justify-center gap-2">
+                <button onclick="shareWebsite()"
+                    class="w-full border-2 border-pink-100 text-pink-400 font-semibold py-3 rounded-xl hover:bg-pink-50 transition-all flex items-center justify-center gap-2">
                     Invite Friends 🔗
                 </button>
             </div>
@@ -91,13 +115,15 @@
                 <div id="display-name1" class="text-2xl font-bold tracking-widest text-pink-400"></div>
                 <div id="display-name2" class="text-2xl font-bold tracking-widest text-pink-400"></div>
             </div>
-            
-            <div id="counter-label" class="text-xs font-bold text-gray-400 uppercase opacity-0 transition-opacity">Combined Count</div>
+
+            <div id="counter-label" class="text-xs font-bold text-gray-400 uppercase opacity-0 transition-opacity">
+                Combined Count</div>
             <div id="counter-display" class="text-4xl font-black text-gray-800 mb-6 opacity-0 transition-opacity">
                 0
             </div>
 
-            <div id="flames-container" class="flex justify-center gap-3 text-2xl font-bold mb-8 opacity-0 transition-opacity">
+            <div id="flames-container"
+                class="flex justify-center gap-3 text-2xl font-bold mb-8 opacity-0 transition-opacity">
                 <span data-idx="0" class="flames-letter">F</span>
                 <span data-idx="1" class="flames-letter">L</span>
                 <span data-idx="2" class="flames-letter">A</span>
@@ -121,32 +147,84 @@
             <div id="result-emoji" class="text-7xl mb-4"></div>
             <h2 id="result-text" class="text-3xl font-extrabold text-pink-600 mb-2 uppercase"></h2>
             <p id="result-desc" class="text-gray-500 italic mb-8"></p>
-            
+
             <!-- AdSense Unit -->
-            <div id="ad-wrapper" class="my-6 bg-gray-50 rounded-lg p-2 border border-dashed border-gray-300 min-h-[100px] flex items-center justify-center overflow-hidden relative">
-                <ins class="adsbygoogle"
-                     style="display:block; min-width: 250px; min-height: 90px"
-                     data-ad-client="ca-pub-7606588100266808"
-                     data-ad-slot="8005324279"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <span class="text-[10px] text-gray-400 uppercase absolute top-1 right-1 pointer-events-none">Advertisement</span>
+            <div id="ad-wrapper"
+                class="my-6 bg-gray-50 rounded-lg p-2 border border-dashed border-gray-300 min-h-[100px] flex items-center justify-center overflow-hidden relative">
+                <ins class="adsbygoogle" style="display:block; min-width: 250px; min-height: 90px"
+                    data-ad-client="ca-pub-7606588100266808" data-ad-slot="8005324279" data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <span
+                    class="text-[10px] text-gray-400 uppercase absolute top-1 right-1 pointer-events-none">Advertisement</span>
             </div>
 
             <div class="flex flex-col gap-3">
-                <button onclick="shareResult()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                <button onclick="shareResult()"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
                     Share Result 🔗
                 </button>
-                <button onclick="resetApp()" class="w-full border-2 border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition-all">
+                <button onclick="resetApp()"
+                    class="w-full border-2 border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition-all">
                     Check Another
                 </button>
             </div>
         </div>
 
-        <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-6 py-2 rounded-full text-sm opacity-0 transition-opacity pointer-events-none z-50">
+        <div id="toast"
+            class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-800 text-white px-6 py-2 rounded-full text-sm opacity-0 transition-opacity pointer-events-none z-50">
             Link copied!
         </div>
     </div>
+
+    <!-- SEO Content Section -->
+    <article
+        class="w-full max-w-4xl mt-16 bg-white/50 backdrop-blur-sm p-8 rounded-3xl border border-white/50 shadow-sm text-gray-700">
+        <h2 class="text-2xl font-bold text-pink-600 mb-6 border-b border-pink-100 pb-2">Destiny Revealed: Understanding
+            the FLAMES Game</h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <section>
+                <h3 class="text-lg font-semibold text-pink-500 mb-2">What is FLAMES?</h3>
+                <p class="text-sm leading-relaxed mb-4">
+                    FLAMES is a popular relationship calculation game played mainly by teenagers and young adults. It is
+                    an acronym for **F**riends, **L**ove, **A**ffection, **M**arriage, **E**nemies, and **S**iblings.
+                    While purely for entertainment, it has been a nostalgic staple of school-day fun for generations.
+                </p>
+                <h3 class="text-lg font-semibold text-pink-500 mb-2">How it Works</h3>
+                <p class="text-sm leading-relaxed">
+                    The calculator cross-references the letters in two names, removing common characters. The remaining
+                    count is then cycled through the "F-L-A-M-E-S" sequence to find the final destiny.
+                </p>
+            </section>
+
+            <section>
+                <h3 class="text-lg font-semibold text-pink-500 mb-2">The Meaning Behind the Letters</h3>
+                <ul class="text-sm space-y-2">
+                    <li><strong>F (Friends):</strong> A bond of trust and companionship.</li>
+                    <li><strong>L (Love):</strong> A deep emotional and romantic attraction.</li>
+                    <li><strong>A (Affection):</strong> A sweet, gentle liking for one another.</li>
+                    <li><strong>M (Marriage):</strong> A lifelong commitment and union.</li>
+                    <li><strong>E (Enemies):</strong> Constant friction and disagreement.</li>
+                    <li><strong>S (Siblings):</strong> A protective, brotherly or sisterly bond.</li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-100 italic text-sm text-gray-500">
+            Disclaimer: FLAMES is an algorithm built for entertainment and fun. It does not predict real-life outcomes
+            or scientific relationship compatibility.
+        </div>
+    </article>
+
+    <!-- Footer Section -->
+    <footer class="w-full mt-16 mb-8 text-center text-gray-400 text-xs py-8 border-t border-pink-100">
+        <div class="flex justify-center gap-6 mb-4 font-medium">
+            <a href="index.html" class="hover:text-pink-500 transition-colors">Home</a>
+            <a href="privacy-policy.html" class="hover:text-pink-500 transition-colors">Privacy Policy</a>
+            <a href="terms-of-service.html" class="hover:text-pink-500 transition-colors">Terms of Service</a>
+        </div>
+        <p>&copy; 2026 FLAMES Destiny Calculator. All rights reserved.</p>
+    </footer>
 
     <script>
         const FLAMES_MAP = {
@@ -181,7 +259,7 @@
             document.getElementById('input-container').classList.add('hidden');
             document.getElementById('visualizer').classList.remove('hidden');
             document.getElementById('result-container').classList.add('hidden');
-            
+
             let n1Arr = name1Raw.toLowerCase().replace(/\s/g, '').split('');
             let n2Arr = name2Raw.toLowerCase().replace(/\s/g, '').split('');
 
@@ -201,7 +279,7 @@
                 if (matchIndex !== -1) {
                     tempN2[matchIndex] = null;
                     disp1.children[i].classList.add('struck', 'opacity-30');
-                    for(let j=0; j < disp2.children.length; j++) {
+                    for (let j = 0; j < disp2.children.length; j++) {
                         if (name2Raw.toLowerCase().replace(/\s/g, '')[j] === char && !struckIndices2.includes(j)) {
                             disp2.children[j].classList.add('struck', 'opacity-30');
                             struckIndices2.push(j);
@@ -226,7 +304,7 @@
             document.getElementById('counter-label').classList.remove('opacity-0');
             const countEl = document.getElementById('counter-display');
             countEl.classList.remove('opacity-0');
-            for(let i=0; i<=totalCount; i++) {
+            for (let i = 0; i <= totalCount; i++) {
                 countEl.innerText = i;
                 await sleep(50);
             }
@@ -235,7 +313,7 @@
             const flamesContainer = document.getElementById('flames-container');
             const flamesLetters = Array.from(flamesContainer.children);
             flamesContainer.classList.remove('opacity-0');
-            
+
             let flames = ['F', 'L', 'A', 'M', 'E', 'S'];
             let currentIndex = 0;
 
@@ -250,14 +328,14 @@
                     await sleep(600);
                 }
             } else {
-                flames = ['S']; 
+                flames = ['S'];
                 flamesLetters.slice(0, 5).forEach(el => el.classList.add('eliminated'));
             }
 
             const winnerLetter = flames[0];
             const winnerEl = flamesLetters.find(e => e.innerText === winnerLetter && !e.classList.contains('eliminated'));
             winnerEl.classList.add('winner', 'animate-beat');
-            
+
             await sleep(1500);
             showResult(winnerLetter, name1Raw, name2Raw);
         }
@@ -267,7 +345,7 @@
             document.getElementById('visualizer').classList.add('hidden');
             const resultContainer = document.getElementById('result-container');
             resultContainer.classList.remove('hidden');
-            
+
             document.getElementById('res-name1').innerText = n1;
             document.getElementById('res-name2').innerText = n2;
 
@@ -308,7 +386,7 @@
         function shareResult() {
             const n1 = document.getElementById('name1').value;
             const n2 = document.getElementById('name2').value;
-            if(!n1 || !n2) return;
+            if (!n1 || !n2) return;
             let baseUrl = window.location.href.split('?')[0];
             const url = `${baseUrl}?n1=${encodeURIComponent(n1)}&n2=${encodeURIComponent(n2)}`;
             copyToClipboard(url, "Result link copied!");
@@ -332,4 +410,5 @@
         }
     </script>
 </body>
+
 </html>
