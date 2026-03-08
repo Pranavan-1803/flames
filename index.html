@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLAMES - Discover Your Destiny</title>
+    <title>FLAMES - Discover Your Destiny | Relationship Calculator</title>
+    <meta name="description"
+        content="Calculate your relationship destiny with the classic FLAMES game! Find out if you're meant to be Friends, Lovers, Affectionate, Married, Enemies, or Siblings with this fun, interactive name calculator.">
+    <meta name="keywords"
+        content="flames, flames game, flames calculator, relationship calculator, love calculator, name compatibility, fun games">
+
 
     <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606588100266808"
@@ -74,9 +79,22 @@
     </style>
 </head>
 
-<body class="flex flex-col items-center justify-center p-4">
+<body class="flex flex-col items-center justify-center pt-20 p-4">
 
-    <div id="app" class="w-full max-w-md bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-white">
+    <!-- Top Navigation Header -->
+    <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md border-b border-pink-100 z-50">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold text-pink-600 tracking-tighter">FLAMES</a>
+            <div class="flex gap-4 text-sm font-medium text-gray-500">
+                <a href="index.html" class="hover:text-pink-500 transition-colors">Home</a>
+                <a href="privacy-policy.html" class="hover:text-pink-500 transition-colors">Privacy</a>
+                <a href="terms-of-service.html" class="hover:text-pink-500 transition-colors">Terms</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="app"
+        class="w-full max-w-md bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl border border-white mt-4">
         <header class="text-center mb-8">
             <h1 class="text-4xl font-extrabold text-pink-600 tracking-tighter mb-2">FLAMES</h1>
             <p class="text-gray-500 text-sm">Discover your relationship's true path</p>
@@ -148,16 +166,6 @@
             <h2 id="result-text" class="text-3xl font-extrabold text-pink-600 mb-2 uppercase"></h2>
             <p id="result-desc" class="text-gray-500 italic mb-8"></p>
 
-            <!-- AdSense Unit -->
-            <div id="ad-wrapper"
-                class="my-6 bg-gray-50 rounded-lg p-2 border border-dashed border-gray-300 min-h-[100px] flex items-center justify-center overflow-hidden relative">
-                <ins class="adsbygoogle" style="display:block; min-width: 250px; min-height: 90px"
-                    data-ad-client="ca-pub-7606588100266808" data-ad-slot="8005324279" data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
-                <span
-                    class="text-[10px] text-gray-400 uppercase absolute top-1 right-1 pointer-events-none">Advertisement</span>
-            </div>
-
             <div class="flex flex-col gap-3">
                 <button onclick="shareResult()"
                     class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
@@ -178,40 +186,127 @@
 
     <!-- SEO Content Section -->
     <article
-        class="w-full max-w-4xl mt-16 bg-white/50 backdrop-blur-sm p-8 rounded-3xl border border-white/50 shadow-sm text-gray-700">
+        class="w-full max-w-4xl mt-16 bg-white/50 backdrop-blur-sm p-8 rounded-3xl border border-white/50 shadow-sm text-gray-700 text-sm leading-relaxed">
         <h2 class="text-2xl font-bold text-pink-600 mb-6 border-b border-pink-100 pb-2">Destiny Revealed: Understanding
             the FLAMES Game</h2>
 
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-pink-500 mb-3">What is the FLAMES Game?</h3>
+            <p class="mb-4">
+                FLAMES is a popular relationship calculation game played mainly by teenagers and young adults around the
+                world. It is
+                an acronym for <strong>F</strong>riends, <strong>L</strong>ove, <strong>A</strong>ffection,
+                <strong>M</strong>arriage, <strong>E</strong>nemies, and <strong>S</strong>iblings. It's a simple,
+                pen-and-paper game that has
+                been a nostalgic staple of school-day fun for generations, determining the destiny of a potential
+                romance or friendship
+                between two people.
+            </p>
+            <p class="mb-4">
+                While it is purely for entertainment purposes, its charm lies in its simplicity and the excitement of
+                seeing what label gets
+                assigned to your crush or friend. Today, digital FLAMES calculators, like the one we've built above,
+                bring the nostalgic game
+                to modern screens with fun animations and an instant result, taking away the manual counting process!
+            </p>
+        </div>
+
+        <!-- AdSense Unit -->
+        <div id="ad-wrapper-article"
+            class="my-8 bg-white/80 rounded-xl shadow-sm p-4 border border-gray-200 min-h-[100px] flex items-center justify-center overflow-hidden relative">
+            <ins class="adsbygoogle" style="display:block; width: 100%; min-width: 250px; min-height: 90px"
+                data-ad-client="ca-pub-7606588100266808" data-ad-slot="8005324279" data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <span
+                class="text-[10px] text-gray-400 uppercase absolute top-2 right-2 pointer-events-none bg-white px-2 py-0.5 rounded shadow-sm">Advertisement</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
             <section>
-                <h3 class="text-lg font-semibold text-pink-500 mb-2">What is FLAMES?</h3>
-                <p class="text-sm leading-relaxed mb-4">
-                    FLAMES is a popular relationship calculation game played mainly by teenagers and young adults. It is
-                    an acronym for <strong>F</strong>riends, <strong>L</strong>ove, <strong>A</strong>ffection,
-                    <strong>M</strong>arriage, <strong>E</strong>nemies, and <strong>S</strong>iblings.
-                    While purely for entertainment, it has been a nostalgic staple of school-day fun for generations.
+                <h3 class="text-lg font-semibold text-pink-500 mb-3">How does the FLAMES Algorithm Work?</h3>
+                <p class="mb-3">
+                    The calculator cross-references the letters in the two names provided, finding and removing the
+                    common characters
+                    shared between them. Once all the matching letters are struck out, the remaining unmatched letters
+                    from both names
+                    are counted.
                 </p>
-                <h3 class="text-lg font-semibold text-pink-500 mb-2">How it Works</h3>
-                <p class="text-sm leading-relaxed">
-                    The calculator cross-references the letters in two names, removing common characters. The remaining
-                    count is then cycled through the "F-L-A-M-E-S" sequence to find the final destiny.
+                <p>
+                    This remaining count is then cycled through the "F-L-A-M-E-S" sequence. Counting starts from 'F',
+                    and whatever letter
+                    the final number lands on is removed. The counting then starts again from the next letter,
+                    continuously eliminating letters until
+                    only one final letter remains. That final letter dictates the relationship status!
                 </p>
             </section>
 
             <section>
-                <h3 class="text-lg font-semibold text-pink-500 mb-2">The Meaning Behind the Letters</h3>
-                <ul class="text-sm space-y-2">
-                    <li><strong>F (Friends):</strong> A bond of trust and companionship.</li>
-                    <li><strong>L (Love):</strong> A deep emotional and romantic attraction.</li>
-                    <li><strong>A (Affection):</strong> A sweet, gentle liking for one another.</li>
-                    <li><strong>M (Marriage):</strong> A lifelong commitment and union.</li>
-                    <li><strong>E (Enemies):</strong> Constant friction and disagreement.</li>
-                    <li><strong>S (Siblings):</strong> A protective, brotherly or sisterly bond.</li>
+                <h3 class="text-lg font-semibold text-pink-500 mb-3">The Meaning Behind the Letters</h3>
+                <ul class="space-y-3 pl-2">
+                    <li class="flex items-start"><span class="mr-3 text-xl block">🤝</span> <span><strong>F
+                                (Friends):</strong> A bond of trust and companionship. It means you are destined to be
+                            great friends.</span></li>
+                    <li class="flex items-start"><span class="mr-3 text-xl block">❤️</span> <span><strong>L
+                                (Love):</strong> A deep emotional and romantic attraction. The sparks are flying!</span>
+                    </li>
+                    <li class="flex items-start"><span class="mr-3 text-xl block">🥰</span> <span><strong>A
+                                (Affection):</strong> A sweet, gentle liking for one another, representing a crush or
+                            deep care.</span></li>
+                    <li class="flex items-start"><span class="mr-3 text-xl block">💍</span> <span><strong>M
+                                (Marriage):</strong> A lifelong commitment and union. Soulmate status unlocked.</span>
+                    </li>
+                    <li class="flex items-start"><span class="mr-3 text-xl block">👿</span> <span><strong>E
+                                (Enemies):</strong> Constant friction and disagreement. Maybe it's best to stay
+                            apart!</span></li>
+                    <li class="flex items-start"><span class="mr-3 text-xl block">👫</span> <span><strong>S
+                                (Siblings):</strong> A protective, brotherly or sisterly bond without romantic
+                            involvement.</span></li>
                 </ul>
             </section>
         </div>
 
-        <div class="mt-8 pt-6 border-t border-gray-100 italic text-sm text-gray-500">
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-pink-500 mb-3">Is FLAMES Accurate?</h3>
+            <p>
+                No! The FLAMES game should not be taken seriously. It's an algorithm based completely on the spelling of
+                names,
+                meaning it has no real psychological, astrological, or scientific basis for determining relationship
+                compatibility.
+                Whether the result says "Marriage" or "Enemies," always remember that it's meant to be a fun, harmless
+                game to share
+                a laugh with your friends and loved ones! A real relationship depends on communication, trust, and
+                mutual respect, not the
+                letters in your name.
+            </p>
+        </div>
+
+        <div class="mb-8 bg-pink-50 rounded-2xl p-6 border border-pink-100">
+            <h3 class="text-xl font-semibold text-pink-500 mb-3 flex items-center gap-2">
+                <span class="text-2xl">💡</span> Fun Facts About Names and Relationships
+            </h3>
+            <ul class="space-y-3 pl-2">
+                <li class="flex items-start">
+                    <span class="mr-2 text-pink-400 font-bold">•</span>
+                    <span><strong>The "Name-Letter Effect":</strong> Psychologists have found that people tend to prefer
+                        the letters in their own name, leading to a subtle subconscious preference for people, places,
+                        and things that share those letters!</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="mr-2 text-pink-400 font-bold">•</span>
+                    <span><strong>Similarity Attracts:</strong> While opposites can attract, research shows that couples
+                        with similar traits, backgrounds, and sometimes even similar-sounding names or initials often
+                        form strong bonds.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="mr-2 text-pink-400 font-bold">•</span>
+                    <span><strong>Nostalgia Factor:</strong> Playing games like FLAMES actually releases dopamine.
+                        Reminiscing about childhood memories with your partner or friends can strengthen your current
+                        bond!</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-100 italic text-xs text-gray-500 text-center">
             Disclaimer: FLAMES is an algorithm built for entertainment and fun. It does not predict real-life outcomes
             or scientific relationship compatibility.
         </div>
@@ -238,9 +333,14 @@
         };
 
         const sleep = (ms) => new Promise(res => setTimeout(res, ms));
-        let adInitialized = false;
 
         window.onload = () => {
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) {
+                console.error("AdSense push failed:", e);
+            }
+
             const urlParams = new URLSearchParams(window.location.search);
             const n1 = urlParams.get('n1');
             const n2 = urlParams.get('n2');
@@ -353,16 +453,6 @@
             document.getElementById('result-emoji').innerText = result.emoji;
             document.getElementById('result-text').innerText = result.title;
             document.getElementById('result-desc').innerText = result.desc;
-
-            // Trigger Ad Loading only after the container is visible to avoid "No slot size" error
-            if (!adInitialized) {
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    adInitialized = true;
-                } catch (e) {
-                    console.error("AdSense push failed:", e);
-                }
-            }
         }
 
         function resetApp() {
