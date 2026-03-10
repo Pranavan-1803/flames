@@ -469,18 +469,42 @@
             });
         }
 
-        function shareWebsite() {
+        async function shareWebsite() {
             let baseUrl = window.location.href.split('?')[0];
-            copyToClipboard(baseUrl, "Website link copied!");
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'FLAMES - Discover Your Destiny',
+                        text: 'Check out this fun FLAMES relationship calculator!',
+                        url: baseUrl
+                    });
+                } catch (err) {
+                    console.error('Error sharing:', err);
+                }
+            } else {
+                copyToClipboard(baseUrl, "Website link copied!");
+            }
         }
 
-        function shareResult() {
+        async function shareResult() {
             const n1 = document.getElementById('name1').value;
             const n2 = document.getElementById('name2').value;
             if (!n1 || !n2) return;
             let baseUrl = window.location.href.split('?')[0];
             const url = `${baseUrl}?n1=${encodeURIComponent(n1)}&n2=${encodeURIComponent(n2)}`;
-            copyToClipboard(url, "Result link copied!");
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'My FLAMES Result!',
+                        text: `I just calculated the FLAMES destiny for ${n1} and ${n2}! Check it out:`,
+                        url: url
+                    });
+                } catch (err) {
+                    console.error('Error sharing:', err);
+                }
+            } else {
+                copyToClipboard(url, "Result link copied!");
+            }
         }
 
         function copyToClipboard(text, successMsg) {
