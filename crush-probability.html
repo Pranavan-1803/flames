@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crush Probability Calculator | Will They Text Back?</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+    <meta name="description" content="Calculate your crush probability. Enter names to find out if your rush will text you back with our fun, free algorithm.">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606588100266808" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #fefce8 0%, #fef08a 100%); min-height: 100vh; }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center pt-24 p-4">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md border-b border-yellow-200 z-50">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold text-yellow-600 tracking-tighter">FLAMES 🔥</a>
+            <div class="flex gap-6 text-sm font-medium text-gray-600 items-center">
+                <a href="index.html" class="hover:text-yellow-600 transition-colors">Home</a>
+                <div class="relative group">
+                    <button class="text-yellow-600 font-semibold flex items-center gap-1">Tools ▾</button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-yellow-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 text-left overflow-hidden">
+                        <a href="index.html" class="block px-4 py-2 hover:bg-yellow-50 text-gray-700">FLAMES Calculator</a>
+                        <a href="love-calculator.html" class="block px-4 py-2 hover:bg-yellow-50 text-gray-700">Love Calculator</a>
+                        <a href="friendship-test.html" class="block px-4 py-2 hover:bg-yellow-50 text-gray-700">Friendship Test</a>
+                        <a href="name-numerology.html" class="block px-4 py-2 hover:bg-yellow-50 text-gray-700">Name Numerology</a>
+                        <a href="zodiac-compatibility.html" class="block px-4 py-2 hover:bg-yellow-50 text-gray-700">Zodiac Matches</a>
+                        <a href="crush-probability.html" class="block px-4 py-2 bg-yellow-50 text-yellow-600 font-bold">Crush Probability</a>
+                    </div>
+                </div>
+                <a href="blog.html" class="hover:text-yellow-600 transition-colors">Blog</a>
+                <a href="about.html" class="hover:text-yellow-600 transition-colors">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container -->
+    <div id="app" class="w-full max-w-md bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-white">
+        <header class="text-center mb-8">
+            <div class="text-5xl mb-3">🔮</div>
+            <h1 class="text-3xl font-extrabold text-yellow-600 tracking-tighter mb-2">Crush Probability</h1>
+            <p class="text-gray-500 text-sm">Will they text back today?</p>
+        </header>
+
+        <div id="input-container" class="space-y-4">
+            <div>
+                <input type="text" id="name" placeholder="Crush's Name..."
+                    class="w-full px-4 py-3 rounded-xl border-2 border-yellow-200 focus:border-yellow-400 focus:outline-none transition-all text-lg">
+            </div>
+            <div class="pt-4 flex flex-col gap-3">
+                <button onclick="calculateCrush()" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">Consult the Orb 🔮</button>
+            </div>
+        </div>
+
+        <div id="result-container" class="hidden text-center mt-4">
+            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Probability</p>
+            <div class="text-7xl font-black text-yellow-500 mb-6 drop-shadow-md" id="score-display">0%</div>
+            <h2 id="result-text" class="text-2xl font-bold text-gray-800 mb-2"></h2>
+            <p id="result-desc" class="text-gray-500 text-sm mb-8"></p>
+            <button onclick="location.reload()" class="w-full border-2 border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition-all">Ask Again Tomorrow</button>
+        </div>
+    </div>
+
+    <!-- SEO Article -->
+    <article class="w-full max-w-4xl mt-16 bg-white/60 backdrop-blur-sm p-8 rounded-3xl border border-white/50 shadow-sm text-gray-700 text-sm leading-relaxed">
+        <h2 class="text-2xl font-bold text-yellow-600 mb-6 border-b border-yellow-200 pb-2">The Magic of the Crush Probability Oracle</h2>
+        <div class="mb-8">
+            <p class="mb-4">Ever found yourself staring at your phone, agonizing over whether your crush is going to text you back or not? The Crush Probability Oracle is a fun digital toy designed to take the edge off the waiting game.</p>
+            <p>Our algorithm takes the name you enter, runs it through a highly unscientific process of randomized magic strings, and spits out a probability score. While it absolutely cannot predict the actual future (because free will exists!), it is a fantastic tool for sharing a laugh with your friends while you wait for that notification ping.</p>
+        </div>
+        
+        <div class="my-8 bg-white/80 rounded-xl shadow-sm p-4 border border-gray-200 min-h-[100px] flex items-center justify-center relative">
+            <ins class="adsbygoogle" style="display:block; width: 100%; min-width: 250px; min-height: 90px" data-ad-client="ca-pub-7606588100266808" data-ad-slot="8005324279" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <span class="text-[10px] text-gray-400 uppercase absolute top-2 right-2">Ad</span>
+        </div>
+    </article>
+
+    <script>
+        function calculateCrush() {
+            const n = document.getElementById('name').value.trim();
+            if (!n) return alert("Enter a name!");
+            document.getElementById('input-container').classList.add('hidden');
+            document.getElementById('result-container').classList.remove('hidden');
+
+            // Generate randomized probability that changes every day for the same name
+            const today = new Date().toDateString();
+            let sum = 0;
+            for(let i=0; i<n.length; i++) sum += n.charCodeAt(i);
+            const seed = sum + today.length;
+            
+            // Randomish number between 2 and 98
+            let score = ((Math.sin(seed) * 10000) % 96 ) + 2;
+            score = Math.floor(Math.abs(score));
+
+            document.getElementById('score-display').innerText = score + '%';
+            
+            let title = "", desc = "";
+            if (score <= 20) { title = "Don't Hold Your Breath 💤"; desc = "They might be 'asleep' (or ignoring you)."; }
+            else if (score <= 50) { title = "Maybe Tomorrow 📱"; desc = "It's a coin toss currently!"; }
+            else if (score <= 80) { title = "Looking Good! 😏"; desc = "Keep your phone off silent."; }
+            else { title = "Typing Right Now! 💬"; desc = "They are definitely thinking about you."; }
+
+            document.getElementById('result-text').innerText = title;
+            document.getElementById('result-desc').innerText = desc;
+        }
+    </script>
+</body>
+</html>

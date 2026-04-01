@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Numerology Calculator | Personality Number</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔢</text></svg>">
+    <meta name="description" content="Calculate your name numerology number for free. Discover your life path, personality traits, and numerological destiny based on your full name.">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606588100266808" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); min-height: 100vh; }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center pt-24 p-4">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md border-b border-blue-100 z-50">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold text-blue-600 tracking-tighter">FLAMES 🔥</a>
+            <div class="flex gap-6 text-sm font-medium text-gray-600 items-center">
+                <a href="index.html" class="hover:text-blue-500 transition-colors">Home</a>
+                <div class="relative group">
+                    <button class="text-blue-500 font-semibold flex items-center gap-1">Tools ▾</button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-blue-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 text-left overflow-hidden">
+                        <a href="index.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">FLAMES Calculator</a>
+                        <a href="love-calculator.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Love Calculator</a>
+                        <a href="friendship-test.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Friendship Test</a>
+                        <a href="name-numerology.html" class="block px-4 py-2 bg-blue-50 text-blue-600 font-bold">Name Numerology</a>
+                        <a href="zodiac-compatibility.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Zodiac Matches</a>
+                        <a href="crush-probability.html" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Crush Probability</a>
+                    </div>
+                </div>
+                <a href="blog.html" class="hover:text-blue-500 transition-colors">Blog</a>
+                <a href="about.html" class="hover:text-blue-500 transition-colors">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- App Container -->
+    <div id="app" class="w-full max-w-md bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-white">
+        <header class="text-center mb-8">
+            <div class="text-5xl mb-3">🔢</div>
+            <h1 class="text-3xl font-extrabold text-blue-600 tracking-tighter mb-2">Name Numerology</h1>
+            <p class="text-gray-500 text-sm">Discover your destiny number</p>
+        </header>
+
+        <div id="input-container" class="space-y-4">
+            <div>
+                <input type="text" id="fullname" placeholder="Enter Full Name"
+                    class="w-full px-4 py-3 rounded-xl border-2 border-blue-100 focus:border-blue-400 focus:outline-none transition-all text-lg text-center uppercase">
+            </div>
+            <div class="pt-4 flex flex-col gap-3">
+                <button onclick="calculateNumerology()" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">Calculate Number ✨</button>
+            </div>
+        </div>
+
+        <div id="result-container" class="hidden text-center mt-4">
+            <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Your Destiny Number</p>
+            <div class="text-8xl font-black text-blue-600 mb-6 drop-shadow-md" id="number-display">1</div>
+            <h2 id="result-text" class="text-2xl font-bold text-gray-800 mb-2">The Leader</h2>
+            <p id="result-desc" class="text-gray-500 text-sm mb-8">Independent, creative, and ambitious.</p>
+            <button onclick="location.reload()" class="w-full border-2 border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition-all">Check Another Name</button>
+        </div>
+    </div>
+
+    <!-- SEO Article -->
+    <article class="w-full max-w-4xl mt-16 bg-white/60 backdrop-blur-sm p-8 rounded-3xl border border-white/50 shadow-sm text-gray-700 text-sm leading-relaxed">
+        <h2 class="text-2xl font-bold text-blue-600 mb-6 border-b border-blue-100 pb-2">The Science of Name Numerology</h2>
+        <div class="mb-8">
+            <p class="mb-4">Numerology is an ancient esoteric science based on the principle that the universe is a system, and once broken down we are left with the basic elements: numbers. Your Name Numerology (or Destiny Number) is calculated by converting the letters of your full birth name into numbers and reducing them down to a single digit.</p>
+            <p>Our completely free calculator uses the popular Pythagorean numerology method. In this system, each letter of the alphabet is assigned a number from 1 to 9 based on its place in the alphabet (A=1, B=2, C=3, etc.). By adding these numbers together until you get a single digit, the calculator reveals the core vibrations and personality traits associated with your specific name.</p>
+        </div>
+        
+        <div class="my-8 bg-white/80 rounded-xl shadow-sm p-4 border border-gray-200 min-h-[100px] flex items-center justify-center relative">
+            <ins class="adsbygoogle" style="display:block; width: 100%; min-width: 250px; min-height: 90px" data-ad-client="ca-pub-7606588100266808" data-ad-slot="8005324279" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <span class="text-[10px] text-gray-400 uppercase absolute top-2 right-2">Ad</span>
+        </div>
+
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-blue-500 mb-3">Meaning of Numbers 1 through 9</h3>
+            <ul class="space-y-3">
+                <li><strong>1 (The Leader):</strong> Independent, pioneering, and highly ambitious. You are meant to pave your own path.</li>
+                <li><strong>2 (The Peacemaker):</strong> Cooperative, adaptable, and empathetic. You thrive in partnerships and diplomacy.</li>
+                <li><strong>3 (The Communicator):</strong> Expressive, highly social, and creative. You bring joy and art to the world.</li>
+                <li><strong>4 (The Builder):</strong> Highly practical, disciplined, and reliable. You lay solid foundations.</li>
+                <li><strong>5 (The Adventurer):</strong> Free-spirited, highly adaptable, and curious. You crave variety, travel, and exciting new experiences.</li>
+                <li><strong>6 (The Nurturer):</strong> Responsible, protective, and loving. You are deeply tied to family and community service.</li>
+                <li><strong>7 (The Seeker):</strong> Analytical, intellectual, and deeply spiritual. You are constantly searching for deeper truths and meaning.</li>
+                <li><strong>8 (The Powerhouse):</strong> Authoritative, business-minded, and strong-willed. Your path is tied to material success and leadership.</li>
+                <li><strong>9 (The Humanitarian):</strong> Compassionate, romantic, and selfless. You view the world as a whole and wish to relieve suffering.</li>
+            </ul>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="w-full mt-16 text-center text-gray-500 text-sm py-8 border-t border-blue-100 bg-white/50">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-left">
+                <div><h4 class="font-bold text-blue-600 mb-3 text-lg">FLAMES 🔥</h4><p class="text-xs text-gray-400">Discover your relationship destiny.</p></div>
+                <div><h4 class="font-bold text-gray-700 mb-3">Tools</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="index.html" class="hover:text-blue-500">FLAMES Calculator</a></li>
+                        <li><a href="name-numerology.html" class="hover:text-blue-500">Name Numerology</a></li>
+                    </ul>
+                </div>
+                <div><h4 class="font-bold text-gray-700 mb-3">Company</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="about.html" class="hover:text-blue-500">About Us</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-blue-500">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="hover:text-blue-500">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-6 border-t border-blue-100 text-xs text-center text-gray-400">&copy; 2026 FLAMES Destiny Calculator. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        const traits = {
+            1: {title: "The Leader", desc: "Independent, creative, and ambitious. You are meant to pave your own path."},
+            2: {title: "The Peacemaker", desc: "Cooperative, adaptable, and empathetic. You thrive in diplomacy."},
+            3: {title: "The Communicator", desc: "Expressive, highly social, and creative. You bring joy to the world."},
+            4: {title: "The Builder", desc: "Highly practical, disciplined, and reliable. A solid foundation builder."},
+            5: {title: "The Adventurer", desc: "Free-spirited, adaptable, and curious. You crave variety and travel."},
+            6: {title: "The Nurturer", desc: "Responsible, protective, and loving. Deeply tied to family."},
+            7: {title: "The Seeker", desc: "Analytical, intellectual, and deeply spiritual. Searching for truth."},
+            8: {title: "The Powerhouse", desc: "Authoritative, business-minded, and strong-willed. A true CEO."},
+            9: {title: "The Humanitarian", desc: "Compassionate, romantic, and selfless. You care for the world."},
+        };
+
+        function calculateNumerology() {
+            const name = document.getElementById('fullname').value.trim().toUpperCase();
+            if (!name) return alert("Please enter a name!");
+            document.getElementById('input-container').classList.add('hidden');
+            document.getElementById('result-container').classList.remove('hidden');
+
+            let sum = 0;
+            for(let i=0; i<name.length; i++) {
+                let code = name.charCodeAt(i);
+                if (code >= 65 && code <= 90) {
+                    sum += ((code - 64) % 9) || 9; // Pythagorean system A=1, B=2.. I=9, J=1..
+                }
+            }
+            if (sum === 0) sum = 1; // Fallback
+            while(sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+                sum = sum.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            }
+            if (sum === 11 || sum === 22 || sum === 33) sum = sum; // Master numbers, keep as is for some logic but map to base here:
+            if (sum > 9) sum = sum.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            
+            let result = traits[sum] || traits[1];
+
+            document.getElementById('number-display').innerText = sum;
+            document.getElementById('result-text').innerText = result.title;
+            document.getElementById('result-desc').innerText = result.desc;
+        }
+    </script>
+</body>
+</html>

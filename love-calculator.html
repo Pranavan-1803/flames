@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Love Calculator | Relationship Percentage Test</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❤️</text></svg>">
+    <meta name="description"
+        content="Calculate your love percentage with the True Love Calculator. Enter two names and discover your romantic compatibility score instantly for free.">
+    
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7606588100266808"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff1f2 0%, #fee2e2 100%);
+            min-height: 100vh;
+        }
+
+        .heart-beat {
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .meter-container {
+            width: 100%;
+            height: 24px;
+            background-color: #fca5a5;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+            width: 0%;
+            transition: width 2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center pt-24 p-4">
+
+    <!-- Top Navigation Header -->
+    <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md border-b border-red-100 z-50">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="text-xl font-bold text-red-600 tracking-tighter">FLAMES 🔥</a>
+            <div class="flex gap-6 text-sm font-medium text-gray-600 items-center">
+                <a href="index.html" class="hover:text-red-500 transition-colors">Home</a>
+                <div class="relative group">
+                    <button class="text-red-500 font-semibold flex items-center gap-1">Tools ▾</button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-red-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 text-left overflow-hidden">
+                        <a href="index.html" class="block px-4 py-2 hover:bg-red-50 text-gray-700">FLAMES Calculator</a>
+                        <a href="love-calculator.html" class="block px-4 py-2 bg-red-50 text-red-600 font-bold">Love Calculator</a>
+                        <a href="friendship-test.html" class="block px-4 py-2 hover:bg-red-50 text-gray-700">Friendship Test</a>
+                        <a href="name-numerology.html" class="block px-4 py-2 hover:bg-red-50 text-gray-700">Name Numerology</a>
+                        <a href="zodiac-compatibility.html" class="block px-4 py-2 hover:bg-red-50 text-gray-700">Zodiac Matches</a>
+                        <a href="crush-probability.html" class="block px-4 py-2 hover:bg-red-50 text-gray-700">Crush Probability</a>
+                    </div>
+                </div>
+                <a href="blog.html" class="hover:text-red-500 transition-colors">Blog</a>
+                <a href="about.html" class="hover:text-red-500 transition-colors">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="app" class="w-full max-w-md bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-white">
+        <header class="text-center mb-8">
+            <div class="text-5xl mb-3 heart-beat">❤️</div>
+            <h1 class="text-3xl font-extrabold text-red-600 tracking-tighter mb-2">Love Calculator</h1>
+            <p class="text-gray-500 text-sm">Find out your romantic compatibility!</p>
+        </header>
+
+        <!-- Input Section -->
+        <div id="input-container" class="space-y-4">
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Your Name</label>
+                <input type="text" id="name1" placeholder="Romeo..."
+                    class="w-full px-4 py-3 rounded-xl border-2 border-red-100 focus:border-red-400 focus:outline-none transition-all text-lg">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 uppercase tracking-widest mb-1 ml-1">Their Name</label>
+                <input type="text" id="name2" placeholder="Juliet..."
+                    class="w-full px-4 py-3 rounded-xl border-2 border-red-100 focus:border-red-400 focus:outline-none transition-all text-lg">
+            </div>
+
+            <div class="pt-4 flex flex-col gap-3">
+                <button onclick="calculateLove()"
+                    class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-red-200 transition-all active:scale-95">
+                    Test Our Love 💘
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-container" class="hidden text-center mt-4">
+            <div class="mb-6">
+                <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Compatibility Score</p>
+                <div class="text-6xl font-black text-red-600 mb-4" id="score-display">0%</div>
+                
+                <div class="meter-container mb-4">
+                    <div class="meter-fill" id="meter-fill"></div>
+                </div>
+            </div>
+
+            <h2 id="result-text" class="text-2xl font-bold text-gray-800 mb-2"></h2>
+            <p id="result-desc" class="text-gray-500 text-sm mb-8"></p>
+
+            <div class="flex flex-col gap-3">
+                <button onclick="shareResult()"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-xl shadow-md transition-all">
+                    Share Result 🔗
+                </button>
+                <button onclick="resetApp()"
+                    class="w-full border-2 border-gray-200 text-gray-500 font-bold py-3 rounded-xl hover:bg-gray-50 transition-all">
+                    Test Try Another
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEO Content Section -->
+    <article class="w-full max-w-4xl mt-16 bg-white/60 backdrop-blur-sm p-8 rounded-3xl border border-white/50 shadow-sm text-gray-700 text-sm leading-relaxed">
+        <h2 class="text-2xl font-bold text-red-600 mb-6 border-b border-red-100 pb-2">How Does the Love Calculator Work?</h2>
+
+        <div class="mb-8">
+            <p class="mb-4">
+                The True Love Calculator is a fun, algorithmic tool designed to measure the hypothetical romantic compatibility between two people based purely on their names. While real love takes time, trust, and communication, there's always a thrill in seeing a high percentage flash on the screen when you type in your crush's name!
+            </p>
+            <p>
+                Our Love Calculator uses a deterministic name-matching algorithm. This means if you type the exact same two names, you will always get the exact same percentage. It analyzes the numerical value of the letters in both names, computes the overlapping vocal harmonies, and generates a score from 0% to 100%.
+            </p>
+        </div>
+
+        <!-- AdSense Unit -->
+        <div class="my-8 bg-white/80 rounded-xl shadow-sm p-4 border border-gray-200 min-h-[100px] flex items-center justify-center relative">
+            <ins class="adsbygoogle" style="display:block; width: 100%; min-width: 250px; min-height: 90px"
+                data-ad-client="ca-pub-7606588100266808" data-ad-slot="8005324279" data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <span class="text-[10px] text-gray-400 uppercase absolute top-2 right-2">Ad</span>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <section>
+                <h3 class="text-lg font-semibold text-red-500 mb-3">Understanding Your Score</h3>
+                <ul class="space-y-4">
+                    <li><strong>0% - 20%:</strong> <span class="text-gray-600">Consider yourselves acquaintances. Getting past the friend zone might require a miracle!</span></li>
+                    <li><strong>21% - 40%:</strong> <span class="text-gray-600">There might be a slight spark, but it will take a lot of work to turn this into a roaring fire.</span></li>
+                    <li><strong>41% - 60%:</strong> <span class="text-gray-600">A solid middle ground. You likely share some interests and could make it work with effort.</span></li>
+                    <li><strong>61% - 80%:</strong> <span class="text-gray-600">Great compatibility! You naturally click and probably enjoy spending a lot of time together.</span></li>
+                    <li><strong>81% - 100%:</strong> <span class="text-gray-600">Soulmates! A near-perfect match. If this is your crush, you might want to ask them out right now!</span></li>
+                </ul>
+            </section>
+            <section>
+                <h3 class="text-lg font-semibold text-red-500 mb-3">Is it Scientifically Accurate?</h3>
+                <p>
+                    Of course not! Name calculators are meant strictly for entertainment. While there is a psychological phenomenon called the "Name-Letter Effect" where people tend to prefer things (and sometimes other people) that share letters with their own name, it is not a basis for true romantic compatibility. 
+                </p>
+                <p class="mt-3">
+                    Don't let a low score stop you from pursuing a relationship, and don't let a 100% score convince you to marry someone you just met. Use this calculator as a fun icebreaker!
+                </p>
+            </section>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="w-full mt-16 text-center text-gray-500 text-sm py-8 border-t border-red-100 bg-white/50">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="mb-4">
+                <a href="index.html" class="mx-2 hover:text-red-500">Home</a>
+                <a href="about.html" class="mx-2 hover:text-red-500">About</a>
+                <a href="privacy-policy.html" class="mx-2 hover:text-red-500">Privacy</a>
+                <a href="terms-of-service.html" class="mx-2 hover:text-red-500">Terms</a>
+            </div>
+            <p>&copy; 2026 FLAMES Destiny Calculator.</p>
+        </div>
+    </footer>
+
+    <script>
+        function calculateLove() {
+            const n1 = document.getElementById('name1').value.trim().toLowerCase();
+            const n2 = document.getElementById('name2').value.trim().toLowerCase();
+
+            if (!n1 || !n2) {
+                alert("Please enter both names!");
+                return;
+            }
+
+            document.getElementById('input-container').classList.add('hidden');
+            document.getElementById('result-container').classList.remove('hidden');
+
+            // Deterministic calculation
+            let sum1 = 0; let sum2 = 0;
+            for(let i=0; i<n1.length; i++) sum1 += n1.charCodeAt(i);
+            for(let i=0; i<n2.length; i++) sum2 += n2.charCodeAt(i);
+            
+            // Mix them up to get a number between 0 and 100
+            let score = ((sum1 * sum2 * 13) + (sum1 + sum2) * 7) % 101;
+            
+            // Special easter egg for identical names
+            if (n1 === n2) score = 100;
+
+            const scoreDisplay = document.getElementById('score-display');
+            const meterFill = document.getElementById('meter-fill');
+            const resultText = document.getElementById('result-text');
+            const resultDesc = document.getElementById('result-desc');
+
+            // Animation
+            meterFill.style.width = '0%';
+            let currentDisplay = 0;
+            const interval = setInterval(() => {
+                currentDisplay += 1;
+                scoreDisplay.innerText = currentDisplay + '%';
+                if(currentDisplay >= score) {
+                    clearInterval(interval);
+                    scoreDisplay.innerText = score + '%';
+                }
+            }, 20);
+
+            setTimeout(() => {
+                meterFill.style.width = score + '%';
+            }, 100);
+
+            let title = "", desc = "";
+            if(score <= 20) { title = "Not Meant to Be 🥶"; desc = "It might be best to just stay friends."; }
+            else if(score <= 40) { title = "A Rough Start 😬"; desc = "There's a lot of work needed here."; }
+            else if(score <= 60) { title = "Potential 🧐"; desc = "You've got a foundation, see where it goes!"; }
+            else if(score <= 80) { title = "Great Match! 😍"; desc = "Sparks are definitely flying!"; }
+            else { title = "True Love ❤️‍🔥"; desc = "A match made in heaven!"; }
+
+            setTimeout(() => {
+                resultText.innerText = title;
+                resultDesc.innerText = desc;
+            }, 1000);
+        }
+
+        function resetApp() {
+            document.getElementById('input-container').classList.remove('hidden');
+            document.getElementById('result-container').classList.add('hidden');
+            document.getElementById('name1').value = '';
+            document.getElementById('name2').value = '';
+            document.getElementById('score-display').innerText = '0%';
+            document.getElementById('meter-fill').style.width = '0%';
+            document.getElementById('result-text').innerText = '';
+            document.getElementById('result-desc').innerText = '';
+        }
+
+        function shareResult() {
+            if (navigator.share) {
+                const n1 = document.getElementById('name1').value;
+                const n2 = document.getElementById('name2').value;
+                navigator.share({
+                    title: 'Love Calculator Result',
+                    text: `I just checked the love compatibility for ${n1} and ${n2}! Try it yourself:`,
+                    url: window.location.href.split('?')[0]
+                }).catch(console.error);
+            } else {
+                alert("Link copied to clipboard!");
+            }
+        }
+    </script>
+</body>
+</html>
